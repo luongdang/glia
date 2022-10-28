@@ -1,6 +1,6 @@
 # ldang-glia
 
-This repo was contains the my Skill Assessment test for the the position of Infrastructure Engineer position at Glia. As per requirement, this repo contains 3 parts:
+This repo contains my Skill Assessment test for the Infrastructure Engineer position at Glia. As per requirements, this repo contains 3 parts:
 
 1. An API server, written in Python and FastAPI
 2. A docker container
