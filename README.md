@@ -90,15 +90,33 @@ Now you can push the image to Docker hub:
 docker image push luongdang/glia:latest
 ```
 
-## Deploy to Kubernetes
+## Deploy to Kubernete
 
 **Prerequisite**: install `minikube` and `kubectl`.
 
 ```bash
+# Start minikube with 2 nodes: 1 master and 1 worker.
+minikube start --nodes 2
+
+# Check that the nodes are running
+minikube status
+# If you get something like below, the nodes are good:
+# minikube
+# type: Control Plane
+# host: Running
+# kubelet: Running
+# apiserver: Running
+# kubeconfig: Configured
+#
+# minikube-m02
+# type: Worker
+# host: Running
+# kubelet: Running
+
 # Install the Helm chart
 helm install luongdang-glia helm-chart
 
-# Check the pods and wait until it has finished installing
+# Check the pods and wait until it's ready
 kubectl get pods
 
 # Setup the port forward from the local computer to the pod
