@@ -8,10 +8,10 @@ image:
   repository: luongdang/glia
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: latest
 
 imagePullSecrets: []
-nameOverride: ""
+nameOverride: "luongdang-glia"
 fullnameOverride: ""
 
 serviceAccount:
@@ -39,8 +39,6 @@ securityContext: {}
 service:
   type: NodePort
   port: 8000
-  externalPort: 8000
-  internalPort: 8008
 
 ingress:
   enabled: false

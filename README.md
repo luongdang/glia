@@ -1,5 +1,9 @@
 # ldang-glia
 
+> **Note to Glia reviewer:** if you check the commit history, you can find that I spent more than 2 hours completing this assessment. As I noted in my original submission, Helm chart wasn't my forte. However, I'm committed to give this assessment my best effort. It may be late, but it wil be complete. It may be shaky but it will be a learning experience. Only by stepping out of comfort zone will I learn and grow.
+<br><br>
+All 3 requirements are now complete and ready for your review.
+
 This repo contains my Skill Assessment test for the Infrastructure Engineer position at Glia. As per requirements, this repo contains 3 parts:
 
 1. An API server, written in Python and FastAPI
@@ -64,20 +68,47 @@ pytest tests/
 
 ## Dockerize the application
 
+Download & install Docker Desktop. Launch Docker and use the following commands to test a Dockerized version of the app:
+
 ```bash
 # Build the image
-docker image build -t ldang/glia:latest .
+docker image build -t luongdang/glia:latest .
 
 # Start a new container
-# This command will print the Container ID to stdout
+# This command will print the Container ID to stdout.
 docker run -dp 8000:8000 --rm --name glia luongdang/glia
 
 # Now you can open the app at http://localhost:8000
 # When you are done experimenting with the app, stop
-# the container
+# the container.
 docker stop <container_id>
+```
+
+Now you can push the image to Docker hub:
+
+```bash
+docker image push luongdang/glia:latest
 ```
 
 ## Deploy to Kubernetes
 
-TBA
+**Prerequisite**: install `minikube` and `kubectl`.
+
+```bash
+# Install the Helm chart
+helm install luongdang-glia helm-chart
+
+# Check the pods and wait until it has finished installing
+kubectl get pods
+
+# Setup the port forward from the local computer to the pod
+POD_NAME=$(
+kubectl get pods \
+    -l "app.kubernetes.io/name=luongdang-glia" \
+    -o jsonpath="{.items[0].metadata.name}"
+)
+# Forward port 8000 on the local PC to port 8000 in the pod
+kubectl port-forward $POD_NAME 8000:8000
+```
+
+Now you can visit the application in the browser at `http://localhost:8000`.
